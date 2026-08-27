@@ -38,10 +38,10 @@ function IdentityPage() {
   const submit = (e: React.FormEvent) => {
     e.preventDefault();
     const next: Record<string, string> = {};
-    if (!form.fullName.trim()) next.fullName = t("identity.error.name");
-    if (!form.occupation.trim()) next.occupation = t("identity.error.occupation");
-    if (!/^\d{1,2}(\.\d)?$/.test(form.yearsInBusiness.trim())) next.yearsInBusiness = t("identity.error.years");
-    if (!form.location.trim()) next.location = t("identity.error.location");
+    if (!form.fullName.trim()) next["fullName"] = t("identity.error.name");
+    if (!form.occupation.trim()) next["occupation"] = t("identity.error.occupation");
+    if (!/^\d{1,2}(\.\d)?$/.test(form.yearsInBusiness.trim())) next["yearsInBusiness"] = t("identity.error.years");
+    if (!form.location.trim()) next["location"] = t("identity.error.location");
     setErrors(next);
     if (Object.keys(next).length > 0) return;
     setProfile({
@@ -110,7 +110,7 @@ function IdentityPage() {
               label={t("identity.field.name")}
               value={form.fullName}
               onChange={update("fullName")}
-              error={errors.fullName}
+              error={errors["fullName"]}
               placeholder={t("identity.value.name")}
             />
             <Field
@@ -118,7 +118,7 @@ function IdentityPage() {
               label={t("identity.field.occupation")}
               value={form.occupation}
               onChange={update("occupation")}
-              error={errors.occupation}
+              error={errors["occupation"]}
               placeholder={t("identity.value.occupation")}
             />
             <Field
@@ -126,7 +126,7 @@ function IdentityPage() {
               label={t("identity.field.years")}
               value={form.yearsInBusiness}
               onChange={update("yearsInBusiness")}
-              error={errors.yearsInBusiness}
+              error={errors["yearsInBusiness"]}
               placeholder="6"
               inputMode="numeric"
               suffix={t("identity.years.suffix")}
@@ -136,7 +136,7 @@ function IdentityPage() {
               label={t("identity.field.location")}
               value={form.location}
               onChange={update("location")}
-              error={errors.location}
+              error={errors["location"]}
               placeholder={t("identity.value.location")}
             />
           </div>
@@ -169,10 +169,10 @@ function Field({
   label: string;
   value: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  error?: string;
-  placeholder?: string;
-  inputMode?: "numeric";
-  suffix?: string;
+  error?: string | undefined;
+  placeholder?: string | undefined;
+  inputMode?: "numeric" | undefined;
+  suffix?: string | undefined;
 }) {
   return (
     <div>
