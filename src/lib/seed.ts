@@ -1,10 +1,10 @@
 import type { Evidence, UserProfile } from "./types";
 
 export const SEED_PROFILE: UserProfile = {
-  fullName: "Ramesh Kumar",
-  occupation: "Kirana Store Owner",
-  yearsInBusiness: "6",
-  location: "Jaipur, Rajasthan",
+  fullName: "",
+  occupation: "",
+  yearsInBusiness: "",
+  location: "",
 };
 
 export const SEED_EVIDENCE: Evidence[] = [
