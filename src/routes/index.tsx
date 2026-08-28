@@ -68,23 +68,35 @@ function IdentityPage() {
           </h1>
           <p className="mt-4 max-w-xl text-lg text-muted-foreground">{t("identity.support")}</p>
 
-          <div className="mt-8 flex items-start gap-4 rounded-2xl border border-border bg-card p-4 shadow-soft sm:p-5">
-            <img
-              src={rameshImg}
-              alt="Illustration of Ramesh Kumar in his kirana store"
-              width={1024}
-              height={1024}
-              className="size-24 shrink-0 rounded-xl object-cover sm:size-28"
-            />
-            <div>
-              <p className="font-display text-xl font-semibold">{t("identity.greeting")}</p>
-              <p className="mt-1 text-sm font-medium text-foreground">
-                {t("identity.persona.occupation")}
-              </p>
-              <p className="text-sm text-muted-foreground">{t("identity.persona.location")}</p>
-              <p className="mt-3 text-sm text-muted-foreground">{t("identity.explain")}</p>
-            </div>
+          <div className="mt-8 rounded-2xl border border-border bg-card p-5 shadow-soft">
+            <p className="text-xs font-semibold tracking-widest text-muted-foreground uppercase">
+              {t("identity.greeting")}
+            </p>
+            {form.fullName.trim() || form.occupation.trim() || form.location.trim() ? (
+              <div className="mt-3 flex items-start gap-4">
+                <span className="flex size-14 shrink-0 items-center justify-center rounded-xl bg-gold-soft font-display text-xl font-semibold text-brown">
+                  {(form.fullName.trim() || "?").charAt(0).toUpperCase()}
+                </span>
+                <div>
+                  <p className="font-display text-xl font-semibold">
+                    {form.fullName.trim() || t("identity.value.name")}
+                  </p>
+                  {form.occupation.trim() && (
+                    <p className="mt-1 text-sm font-medium text-foreground">{form.occupation}</p>
+                  )}
+                  <p className="text-sm text-muted-foreground">
+                    {[form.location.trim(), form.yearsInBusiness.trim() && `${form.yearsInBusiness} ${t("identity.years.suffix")}`]
+                      .filter(Boolean)
+                      .join(" · ")}
+                  </p>
+                </div>
+              </div>
+            ) : (
+              <p className="mt-3 text-sm text-muted-foreground">{t("identity.preview.empty")}</p>
+            )}
+            <p className="mt-4 text-xs text-muted-foreground">{t("identity.preview.hint")}</p>
           </div>
+
 
           <ul className="mt-6 grid gap-3 sm:grid-cols-3">
             {[
