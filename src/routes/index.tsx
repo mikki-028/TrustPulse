@@ -1,7 +1,6 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
 import { ArrowRight, Eye, Lock, ShieldCheck, Sparkles } from "lucide-react";
-import rameshImg from "@/assets/ramesh.jpg";
 import { Stepper } from "@/components/Stepper";
 import { useI18n } from "@/lib/i18n";
 import { useStore } from "@/lib/store";

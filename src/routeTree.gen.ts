@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AnalysisRouteImport } from './routes/analysis'
 import { Route as EvidenceRouteImport } from './routes/evidence'
+import { Route as ResumeRouteImport } from './routes/resume'
 import { Route as TrustRouteImport } from './routes/trust'
 
 const IndexRoute = IndexRouteImport.update({
@@ -29,6 +30,11 @@ const EvidenceRoute = EvidenceRouteImport.update({
   path: '/evidence',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ResumeRoute = ResumeRouteImport.update({
+  id: '/resume',
+  path: '/resume',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const TrustRoute = TrustRouteImport.update({
   id: '/trust',
   path: '/trust',
@@ -39,12 +45,14 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/analysis': typeof AnalysisRoute
   '/evidence': typeof EvidenceRoute
+  '/resume': typeof ResumeRoute
   '/trust': typeof TrustRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/analysis': typeof AnalysisRoute
   '/evidence': typeof EvidenceRoute
+  '/resume': typeof ResumeRoute
   '/trust': typeof TrustRoute
 }
 export interface FileRoutesById {
@@ -52,20 +60,22 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/analysis': typeof AnalysisRoute
   '/evidence': typeof EvidenceRoute
+  '/resume': typeof ResumeRoute
   '/trust': typeof TrustRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/analysis' | '/evidence' | '/trust'
+  fullPaths: '/' | '/analysis' | '/evidence' | '/resume' | '/trust'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/analysis' | '/evidence' | '/trust'
-  id: '__root__' | '/' | '/analysis' | '/evidence' | '/trust'
+  to: '/' | '/analysis' | '/evidence' | '/resume' | '/trust'
+  id: '__root__' | '/' | '/analysis' | '/evidence' | '/resume' | '/trust'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AnalysisRoute: typeof AnalysisRoute
   EvidenceRoute: typeof EvidenceRoute
+  ResumeRoute: typeof ResumeRoute
   TrustRoute: typeof TrustRoute
 }
 
@@ -92,6 +102,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EvidenceRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/resume': {
+      id: '/resume'
+      path: '/resume'
+      fullPath: '/resume'
+      preLoaderRoute: typeof ResumeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/trust': {
       id: '/trust'
       path: '/trust'
@@ -106,6 +123,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AnalysisRoute: AnalysisRoute,
   EvidenceRoute: EvidenceRoute,
+  ResumeRoute: ResumeRoute,
   TrustRoute: TrustRoute,
 }
 export const routeTree = rootRouteImport
