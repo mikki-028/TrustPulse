@@ -5,6 +5,8 @@ import { StatusBadge } from "@/components/StatusBadge";
 import { useI18n } from "@/lib/i18n";
 import { useStore } from "@/lib/store";
 import { QUALITY_MULTIPLIER, confidenceBand, scoreBand } from "@/lib/scoring";
+import logoAsset from "@/assets/trustpulse-logo.png.asset.json";
+
 
 export const Route = createFileRoute("/resume")({
   head: () => ({
