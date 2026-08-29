@@ -1,8 +1,10 @@
 import { Link, useRouterState } from "@tanstack/react-router";
-import { Activity, RotateCcw } from "lucide-react";
+import { RotateCcw } from "lucide-react";
 import { useI18n } from "@/lib/i18n";
 import { useStore } from "@/lib/store";
 import { cn } from "@/lib/utils";
+import logoAsset from "@/assets/trustpulse-logo.png.asset.json";
+
 
 const NAV = [
   { to: "/", key: "nav.identity" },
@@ -19,16 +21,22 @@ export function AppHeader() {
 
   return (
     <header className="no-print sticky top-0 z-40 border-b border-border/70 bg-background/85 backdrop-blur">
-      <div className="mx-auto flex max-w-6xl flex-wrap items-center gap-x-6 gap-y-3 px-4 py-3 sm:px-6">
-        <Link to="/" className="flex items-center gap-2.5">
-          <span className="flex size-9 items-center justify-center rounded-xl bg-primary text-primary-foreground">
-            <Activity className="size-5" aria-hidden />
-          </span>
-          <span className="leading-tight">
-            <span className="block font-display text-lg font-semibold">{t("brand.name")}</span>
+      <div className="mx-auto flex max-w-6xl flex-wrap items-center gap-x-4 gap-y-3 px-3 py-2.5 sm:gap-x-6 sm:px-6 sm:py-3">
+        <Link to="/" className="flex min-w-0 items-center gap-2.5">
+          <img
+            src={logoAsset.url}
+            alt=""
+            aria-hidden
+            className="size-9 shrink-0 rounded-xl object-contain sm:size-10"
+          />
+          <span className="min-w-0 leading-tight">
+            <span className="block truncate font-display text-base font-semibold sm:text-lg">
+              {t("brand.name")}
+            </span>
             <span className="hidden text-xs text-muted-foreground sm:block">{t("brand.tagline")}</span>
           </span>
         </Link>
+
 
         <nav className="order-3 -mx-1 flex w-full items-center gap-1 overflow-x-auto md:order-none md:mx-0 md:w-auto">
           {NAV.map((item) => {

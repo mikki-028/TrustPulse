@@ -5,6 +5,8 @@ import { StatusBadge } from "@/components/StatusBadge";
 import { useI18n } from "@/lib/i18n";
 import { useStore } from "@/lib/store";
 import { QUALITY_MULTIPLIER, confidenceBand, scoreBand } from "@/lib/scoring";
+import logoAsset from "@/assets/trustpulse-logo.png.asset.json";
+
 
 export const Route = createFileRoute("/resume")({
   head: () => ({
@@ -78,15 +80,24 @@ function ResumePage() {
       </div>
 
       <article className="tp-card tp-rise mt-6 overflow-hidden">
-        <header className="bg-primary px-6 py-8 text-primary-foreground sm:px-10">
-          <p className="text-xs font-semibold tracking-widest uppercase opacity-80">
-            {t("brand.name")} · {t("resume.title")}
-          </p>
-          <h2 className="mt-2 font-display text-3xl font-semibold">{dash(profile.fullName)}</h2>
+        <header className="bg-primary px-5 py-7 text-primary-foreground sm:px-10 sm:py-8">
+          <div className="flex items-center gap-3">
+            <img
+              src={logoAsset.url}
+              alt=""
+              aria-hidden
+              className="size-10 shrink-0 rounded-lg bg-background/90 object-contain p-1"
+            />
+            <p className="min-w-0 text-xs font-semibold tracking-widest uppercase opacity-80">
+              {t("brand.name")} · {t("resume.title")}
+            </p>
+          </div>
+          <h2 className="mt-3 font-display text-2xl font-semibold sm:text-3xl">{dash(profile.fullName)}</h2>
           <p className="mt-1 text-sm opacity-90">
             {[profile.occupation, profile.location].filter((v) => v.trim()).join(" · ") || "—"}
           </p>
         </header>
+
 
         <div className="grid gap-6 p-6 sm:p-10 md:grid-cols-3">
           <section className="md:col-span-1">
