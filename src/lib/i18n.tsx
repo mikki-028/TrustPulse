@@ -569,7 +569,134 @@ const hi: Dict = {
     "क्षेत्रीय भारतीय भाषाएँ, सहमति-आधारित साझाकरण, अकाउंट एग्रीगेटर समर्थन और सत्यापित डेटा एकीकरण भविष्य में जोड़े जाएँगे — ये इस प्रोटोटाइप का हिस्सा नहीं हैं।",
 };
 
-const dicts: Record<Lang, Dict> = { en, hi };
+const enExtra: Dict = {
+  "fs.title": "AI-extracted financial signals",
+  "fs.subtitle":
+    "These are the money patterns our reader pulled out of your documents — not just their status.",
+  "fs.strength": "Evidence strength",
+  "fs.income.label": "Estimated monthly sales",
+  "fs.income.detail": "From {docs} income record(s) covering {months} month(s).",
+  "fs.purchases.label": "Recorded supplier purchases",
+  "fs.purchases.detail": "Averaged from {docs} business purchase record(s).",
+  "fs.repayment.label": "On-time repayment rate",
+  "fs.repayment.detail": "{paid} of {total} installments paid · {late} late.",
+  "fs.consistency.label": "Payment consistency",
+  "fs.consistency.detail": "Longest unbroken run across {streams} recurring bill(s).",
+  "fs.continuity.label": "Business activity span",
+  "fs.continuity.detail": "Documented activity across {docs} business, tax and asset record(s).",
+
+  "inc.title": "Potential inconsistency detected",
+  "inc.conflict.title": "Two documents report the same {issuer} amount",
+  "inc.conflict.detail":
+    "{amount} from {issuer} appears on more than one document. Only one can be counted, so the weaker copy is being ignored. Confirm which one is the original.",
+  "inc.margin.title": "Declared sales and recorded purchases don't line up",
+  "inc.margin.detail":
+    "Sales of {sales}/month against {purchases}/month of stock purchases implies a {margin}% trading margin, which is unusual for this kind of business. Sales or purchase records may be incomplete.",
+  "inc.docs": "Documents involved",
+  "inc.action": "Resolving this raises your Confidence Score.",
+  "inc.none": "No contradictions found across your documents.",
+
+  "trust.factors.title": "What is driving this score",
+  "trust.factors.sub": "The three factors moving your Trust Score the most right now.",
+  "factor.up": "Lifting your score",
+  "factor.down": "Holding your score back",
+  "factor.contribution": "{points} pts of 100",
+  "factor.missing": "No evidence yet in this area",
+
+  "conf.explain.title": "Trust Score vs Confidence Score",
+  "conf.explain.trust":
+    "Trust Score answers: how strong is the financial behaviour your evidence shows? It is a weighted read of repayment, discipline, continuity and income.",
+  "conf.explain.conf":
+    "Confidence Score answers something different: how reliable and complete is that evidence? It ignores how good your numbers look and measures how well they can be trusted — document quality, coverage of all four areas, corroboration across independent sources, minus anomalies.",
+  "conf.explain.note":
+    "A high Trust Score with low Confidence means the story looks good but is thinly evidenced. Both numbers matter.",
+  "conf.factor.quality": "Evidence quality",
+  "conf.factor.coverage": "Area coverage",
+  "conf.factor.triangulation": "Independent corroboration",
+  "conf.factor.anomaly": "Anomaly penalty",
+
+  "rec.missing.title": "Add your first {cat} document",
+  "rec.missing.impact": "Unlocks a scoring area with no evidence",
+  "rec.weak.title": "Strengthen {cat}: current evidence is self-declared or unverified",
+  "rec.weak.impact": "Higher-quality proof counts far more",
+  "rec.inconsistency.title": "Resolve the flagged inconsistency between your documents",
+  "rec.inconsistency.impact": "Removes the anomaly penalty on Confidence",
+  "rec.evidence": "Based on: {what}",
+
+  "resume.share": "Share resume",
+  "resume.download": "Download",
+  "resume.copied": "Resume summary copied to clipboard",
+  "resume.shareHint": "Share a plain-text summary, or download it to send to a lender.",
+  "resume.aiSignals": "Verified financial signals",
+  "resume.assessment": "AI assessment",
+  "resume.flag": "Flagged for review",
+};
+
+const hiExtra: Dict = {
+  "fs.title": "AI द्वारा निकाले गए वित्तीय संकेत",
+  "fs.subtitle":
+    "ये आपके दस्तावेज़ों से निकाले गए पैसों के पैटर्न हैं — सिर्फ़ दस्तावेज़ की स्थिति नहीं।",
+  "fs.strength": "प्रमाण की मज़बूती",
+  "fs.income.label": "अनुमानित मासिक बिक्री",
+  "fs.income.detail": "{months} महीनों के {docs} आय रिकॉर्ड से।",
+  "fs.purchases.label": "दर्ज आपूर्तिकर्ता खरीद",
+  "fs.purchases.detail": "{docs} व्यावसायिक खरीद रिकॉर्ड का औसत।",
+  "fs.repayment.label": "समय पर पुनर्भुगतान दर",
+  "fs.repayment.detail": "{total} में से {paid} किस्तें चुकाई गईं · {late} देर से।",
+  "fs.consistency.label": "भुगतान निरंतरता",
+  "fs.consistency.detail": "{streams} नियमित बिलों में सबसे लंबी निरंतर अवधि।",
+  "fs.continuity.label": "व्यावसायिक गतिविधि अवधि",
+  "fs.continuity.detail": "{docs} व्यापार, कर और संपत्ति रिकॉर्ड में दर्ज गतिविधि।",
+
+  "inc.title": "संभावित विसंगति मिली",
+  "inc.conflict.title": "दो दस्तावेज़ों में {issuer} की एक ही राशि दर्ज है",
+  "inc.conflict.detail":
+    "{issuer} की {amount} राशि एक से अधिक दस्तावेज़ में दिखती है। केवल एक ही गिनी जा सकती है, इसलिए कमज़ोर प्रति नहीं गिनी जा रही। पुष्टि करें कि मूल कौन-सा है।",
+  "inc.margin.title": "घोषित बिक्री और दर्ज खरीद मेल नहीं खातीं",
+  "inc.margin.detail":
+    "{sales}/माह बिक्री बनाम {purchases}/माह स्टॉक खरीद से {margin}% व्यापारिक मार्जिन बनता है, जो इस तरह के व्यवसाय के लिए असामान्य है। बिक्री या खरीद रिकॉर्ड अधूरे हो सकते हैं।",
+  "inc.docs": "संबंधित दस्तावेज़",
+  "inc.action": "इसे सुलझाने से आपका विश्वास स्कोर बढ़ेगा।",
+  "inc.none": "आपके दस्तावेज़ों में कोई विरोधाभास नहीं मिला।",
+
+  "trust.factors.title": "यह स्कोर किन कारणों से बना है",
+  "trust.factors.sub": "अभी आपके ट्रस्ट स्कोर को सबसे अधिक प्रभावित करने वाले तीन कारक।",
+  "factor.up": "स्कोर बढ़ा रहे हैं",
+  "factor.down": "स्कोर रोक रहे हैं",
+  "factor.contribution": "100 में से {points} अंक",
+  "factor.missing": "इस क्षेत्र में अभी कोई प्रमाण नहीं",
+
+  "conf.explain.title": "ट्रस्ट स्कोर बनाम विश्वास स्कोर",
+  "conf.explain.trust":
+    "ट्रस्ट स्कोर बताता है: आपके प्रमाण जो वित्तीय व्यवहार दिखाते हैं वह कितना मज़बूत है — पुनर्भुगतान, अनुशासन, निरंतरता और आय का भारित आकलन।",
+  "conf.explain.conf":
+    "विश्वास स्कोर अलग बात बताता है: वे प्रमाण कितने विश्वसनीय और पूर्ण हैं। यह दस्तावेज़ गुणवत्ता, चारों क्षेत्रों की कवरेज, स्वतंत्र स्रोतों से पुष्टि और विसंगतियों को मापता है।",
+  "conf.explain.note":
+    "ऊँचा ट्रस्ट स्कोर पर कम विश्वास का अर्थ है कहानी अच्छी दिखती है पर प्रमाण कम हैं। दोनों संख्याएँ मायने रखती हैं।",
+  "conf.factor.quality": "प्रमाण गुणवत्ता",
+  "conf.factor.coverage": "क्षेत्र कवरेज",
+  "conf.factor.triangulation": "स्वतंत्र पुष्टि",
+  "conf.factor.anomaly": "विसंगति दंड",
+
+  "rec.missing.title": "{cat} का पहला दस्तावेज़ जोड़ें",
+  "rec.missing.impact": "बिना प्रमाण वाला क्षेत्र सक्रिय होगा",
+  "rec.weak.title": "{cat} मज़बूत करें: मौजूदा प्रमाण स्व-घोषित या असत्यापित हैं",
+  "rec.weak.impact": "उच्च गुणवत्ता वाले प्रमाण कहीं अधिक गिने जाते हैं",
+  "rec.inconsistency.title": "दस्तावेज़ों के बीच मिली विसंगति सुलझाएँ",
+  "rec.inconsistency.impact": "विश्वास स्कोर पर लगा दंड हटेगा",
+  "rec.evidence": "आधार: {what}",
+
+  "resume.share": "रिज़्यूमे साझा करें",
+  "resume.download": "डाउनलोड करें",
+  "resume.copied": "रिज़्यूमे सारांश कॉपी हो गया",
+  "resume.shareHint": "सादा-पाठ सारांश साझा करें, या ऋणदाता को भेजने के लिए डाउनलोड करें।",
+  "resume.aiSignals": "सत्यापित वित्तीय संकेत",
+  "resume.assessment": "AI आकलन",
+  "resume.flag": "समीक्षा हेतु चिह्नित",
+};
+
+const dicts: Record<Lang, Dict> = { en: { ...en, ...enExtra }, hi: { ...hi, ...hiExtra } };
+
 
 interface I18nValue {
   lang: Lang;
