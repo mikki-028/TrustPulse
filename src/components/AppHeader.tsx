@@ -1,8 +1,10 @@
 import { Link, useRouterState } from "@tanstack/react-router";
-import { Activity, RotateCcw } from "lucide-react";
+import { RotateCcw } from "lucide-react";
 import { useI18n } from "@/lib/i18n";
 import { useStore } from "@/lib/store";
 import { cn } from "@/lib/utils";
+import logoAsset from "@/assets/trustpulse-logo.png.asset.json";
+
 
 const NAV = [
   { to: "/", key: "nav.identity" },
