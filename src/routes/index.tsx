@@ -152,6 +152,14 @@ function IdentityPage() {
             />
           </div>
 
+          <KycBlock
+            aadhaar={form.aadhaar ?? ""}
+            pan={form.pan ?? ""}
+            verified={!!form.kycVerified}
+            onChange={(patch) => setForm((f) => ({ ...f, ...patch }))}
+          />
+
+
           <button
             type="submit"
             className="mt-8 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-primary px-6 py-3.5 text-base font-semibold text-primary-foreground transition-transform hover:brightness-110 active:scale-[0.99]"
