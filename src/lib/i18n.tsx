@@ -570,6 +570,21 @@ const hi: Dict = {
 };
 
 const enExtra: Dict = {
+  "cam.prompt.title": "Secure your evidence",
+  "cam.prompt.desc":
+    "Allow camera access to verify that you are the person submitting these documents.",
+  "cam.allow": "Allow camera",
+  "cam.later": "Not now",
+  "cam.verify.title": "Face verification",
+  "cam.step.center": "Position your face inside the circle",
+  "cam.step.left": "Move your face slightly left",
+  "cam.step.right": "Move your face slightly right",
+  "cam.done.title": "You're verified",
+  "cam.done.desc": "Your identity has been confirmed for this evidence session.",
+  "cam.continue": "Continue to vault",
+  "cam.error": "Camera access was blocked. You can continue without verification.",
+  "cam.badge": "Identity verified",
+  "cam.disclaimer": "Prototype liveness check only. No biometric data is stored.",
   "fs.title": "AI-extracted financial signals",
   "fs.subtitle":
     "These are the money patterns our reader pulled out of your documents — not just their status.",
