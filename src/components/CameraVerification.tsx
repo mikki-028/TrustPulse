@@ -2,7 +2,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { Camera, CheckCircle2, ShieldCheck, X } from "lucide-react";
 import { useI18n } from "@/lib/i18n";
 
-type Phase = "prompt" | "verifying" | "done" | "dismissed";
+type Phase = "prompt" | "verifying" | "success" | "done" | "dismissed";
 type Step = "center" | "left" | "right";
 
 const STEP_ORDER: Step[] = ["center", "left", "right"];
@@ -62,7 +62,7 @@ export function CameraVerification() {
     const timer = window.setTimeout(() => {
       const next = STEP_ORDER[idx + 1];
       if (next) setStep(next);
-      else setPhase("done");
+      else setPhase("success");
     }, 2200);
     return () => window.clearTimeout(timer);
   }, [phase, step]);
@@ -138,6 +138,23 @@ export function CameraVerification() {
                 {t("cam.later")}
               </button>
             </div>
+          </>
+        ) : phase === "success" ? (
+          <>
+            <span className="mx-auto flex size-14 items-center justify-center rounded-full bg-success-soft text-success">
+              <CheckCircle2 className="size-7" aria-hidden />
+            </span>
+            <h2 className="mt-4 text-center font-display text-2xl font-semibold">
+              {t("cam.done.title")}
+            </h2>
+            <p className="mt-2 text-center text-muted-foreground">{t("cam.done.desc")}</p>
+            <button
+              type="button"
+              onClick={() => setPhase("done")}
+              className="mt-6 w-full rounded-xl bg-primary px-5 py-3 font-semibold text-primary-foreground transition hover:brightness-110"
+            >
+              {t("cam.continue")}
+            </button>
           </>
         ) : (
           <>
