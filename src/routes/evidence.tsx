@@ -197,7 +197,7 @@ function EvidencePage() {
         />
       )}
       {detail && <DetailModal evidence={detail} onClose={() => setDetail(null)} />}
-      <CameraVerification />
+      <CameraVerification onDecline={() => navigate({ to: "/" })} />
     </div>
   );
 }

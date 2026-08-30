@@ -11,7 +11,7 @@ const STEP_ORDER: Step[] = ["center", "left", "right"];
  * Lightweight prototype identity-presence layer for the Evidence Vault.
  * Simulated liveness only — no biometric data is captured or stored.
  */
-export function CameraVerification() {
+export function CameraVerification({ onDecline }: { onDecline?: () => void }) {
   const { t } = useI18n();
   const [phase, setPhase] = useState<Phase>("prompt");
   const [step, setStep] = useState<Step>("center");
@@ -132,7 +132,10 @@ export function CameraVerification() {
               </button>
               <button
                 type="button"
-                onClick={() => setPhase("dismissed")}
+                onClick={() => {
+                  setPhase("dismissed");
+                  onDecline?.();
+                }}
                 className="rounded-xl border border-border px-5 py-3 font-semibold text-muted-foreground hover:bg-secondary"
               >
                 {t("cam.later")}

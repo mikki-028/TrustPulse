@@ -1,6 +1,6 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
-import { ArrowRight, Eye, Lock, ShieldCheck, Sparkles } from "lucide-react";
+import { ArrowRight, BadgeCheck, Eye, Lock, ShieldCheck, Sparkles } from "lucide-react";
 import { Stepper } from "@/components/Stepper";
 import { useI18n } from "@/lib/i18n";
 import { useStore } from "@/lib/store";
@@ -48,6 +48,9 @@ function IdentityPage() {
       occupation: form.occupation.trim(),
       yearsInBusiness: form.yearsInBusiness.trim(),
       location: form.location.trim(),
+      aadhaar: form.aadhaar?.trim() ?? "",
+      pan: form.pan?.trim().toUpperCase() ?? "",
+      kycVerified: !!form.kycVerified,
     });
     navigate({ to: "/evidence" });
   };
@@ -152,6 +155,14 @@ function IdentityPage() {
             />
           </div>
 
+          <KycBlock
+            aadhaar={form.aadhaar ?? ""}
+            pan={form.pan ?? ""}
+            verified={!!form.kycVerified}
+            onChange={(patch) => setForm((f) => ({ ...f, ...patch }))}
+          />
+
+
           <button
             type="submit"
             className="mt-8 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-primary px-6 py-3.5 text-base font-semibold text-primary-foreground transition-transform hover:brightness-110 active:scale-[0.99]"
@@ -207,6 +218,131 @@ function Field({
         )}
       </div>
       {error && <p className="mt-1.5 text-sm font-medium text-danger">{error}</p>}
+    </div>
+  );
+}
+
+function KycBlock({
+  aadhaar,
+  pan,
+  verified,
+  onChange,
+}: {
+  aadhaar: string;
+  pan: string;
+  verified: boolean;
+  onChange: (patch: { aadhaar?: string; pan?: string; kycVerified?: boolean }) => void;
+}) {
+  const { t } = useI18n();
+  const [otpSent, setOtpSent] = useState(false);
+  const [otp, setOtp] = useState("");
+  const [error, setError] = useState("");
+
+  const sendOtp = () => {
+    if (!/^\d{12}$/.test(aadhaar.replace(/\s/g, ""))) return setError(t("kyc.error.aadhaar"));
+    if (!/^[A-Z]{5}\d{4}[A-Z]$/.test(pan.trim().toUpperCase())) return setError(t("kyc.error.pan"));
+    setError("");
+    setOtp("");
+    setOtpSent(true);
+  };
+
+  const verify = () => {
+    if (otp.trim() !== "123456") return setError(t("kyc.error.otp"));
+    setError("");
+    setOtpSent(false);
+    onChange({ kycVerified: true });
+  };
+
+  return (
+    <div className="mt-6 rounded-2xl border border-border bg-surface p-5">
+      <div className="flex items-start gap-3">
+        <span className="flex size-9 shrink-0 items-center justify-center rounded-xl bg-gold-soft text-brown">
+          <BadgeCheck className="size-5" aria-hidden />
+        </span>
+        <div className="min-w-0">
+          <h3 className="font-display text-lg font-semibold">{t("kyc.title")}</h3>
+          <p className="mt-1 text-sm text-muted-foreground">{t("kyc.desc")}</p>
+        </div>
+      </div>
+
+      {verified ? (
+        <p className="mt-4 inline-flex items-center gap-2 rounded-xl bg-success-soft px-3 py-2 text-sm font-semibold text-success">
+          <ShieldCheck className="size-4" aria-hidden />
+          {t("kyc.verified")}
+        </p>
+      ) : (
+        <div className="mt-4 space-y-4">
+          <div className="grid gap-4 sm:grid-cols-2">
+            <div>
+              <label htmlFor="aadhaar" className="block text-sm font-semibold">
+                {t("kyc.aadhaar")}
+              </label>
+              <input
+                id="aadhaar"
+                value={aadhaar}
+                inputMode="numeric"
+                maxLength={14}
+                onChange={(e) => onChange({ aadhaar: e.target.value })}
+                placeholder={t("kyc.aadhaar.ph")}
+                className="mt-2 w-full rounded-xl border border-input bg-background px-4 py-3 text-base outline-none transition-shadow focus:border-primary focus:ring-4 focus:ring-primary/12"
+              />
+            </div>
+            <div>
+              <label htmlFor="pan" className="block text-sm font-semibold">
+                {t("kyc.pan")}
+              </label>
+              <input
+                id="pan"
+                value={pan}
+                maxLength={10}
+                onChange={(e) => onChange({ pan: e.target.value.toUpperCase() })}
+                placeholder={t("kyc.pan.ph")}
+                className="mt-2 w-full rounded-xl border border-input bg-background px-4 py-3 text-base uppercase outline-none transition-shadow focus:border-primary focus:ring-4 focus:ring-primary/12"
+              />
+            </div>
+          </div>
+
+          {otpSent && (
+            <div>
+              <p className="text-xs text-muted-foreground">{t("kyc.sent")}</p>
+              <label htmlFor="otp" className="mt-3 block text-sm font-semibold">
+                {t("kyc.otp")}
+              </label>
+              <input
+                id="otp"
+                value={otp}
+                inputMode="numeric"
+                maxLength={6}
+                onChange={(e) => setOtp(e.target.value)}
+                placeholder="123456"
+                className="mt-2 w-full rounded-xl border border-input bg-background px-4 py-3 text-base tracking-[0.4em] outline-none transition-shadow focus:border-primary focus:ring-4 focus:ring-primary/12"
+              />
+            </div>
+          )}
+
+          {error && <p className="text-sm font-medium text-danger">{error}</p>}
+
+          <div className="flex flex-col gap-3 sm:flex-row">
+            {otpSent && (
+              <button
+                type="button"
+                onClick={verify}
+                className="flex-1 rounded-xl bg-primary px-5 py-3 font-semibold text-primary-foreground transition hover:brightness-110"
+              >
+                {t("kyc.verify")}
+              </button>
+            )}
+            <button
+              type="button"
+              onClick={sendOtp}
+              className="rounded-xl border border-border px-5 py-3 font-semibold text-muted-foreground hover:bg-secondary"
+            >
+              {otpSent ? t("kyc.resend") : t("kyc.send")}
+            </button>
+          </div>
+          <p className="text-xs text-muted-foreground">{t("kyc.disclaimer")}</p>
+        </div>
+      )}
     </div>
   );
 }
