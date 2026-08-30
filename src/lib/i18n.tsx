@@ -570,6 +570,21 @@ const hi: Dict = {
 };
 
 const enExtra: Dict = {
+  "cam.prompt.title": "Secure your evidence",
+  "cam.prompt.desc":
+    "Allow camera access to verify that you are the person submitting these documents.",
+  "cam.allow": "Allow camera",
+  "cam.later": "Not now",
+  "cam.verify.title": "Face verification",
+  "cam.step.center": "Position your face inside the circle",
+  "cam.step.left": "Move your face slightly left",
+  "cam.step.right": "Move your face slightly right",
+  "cam.done.title": "You're verified",
+  "cam.done.desc": "Your identity has been confirmed for this evidence session.",
+  "cam.continue": "Continue to vault",
+  "cam.error": "Camera access was blocked. You can continue without verification.",
+  "cam.badge": "Identity verified",
+  "cam.disclaimer": "Prototype liveness check only. No biometric data is stored.",
   "fs.title": "AI-extracted financial signals",
   "fs.subtitle":
     "These are the money patterns our reader pulled out of your documents — not just their status.",
@@ -633,6 +648,21 @@ const enExtra: Dict = {
 };
 
 const hiExtra: Dict = {
+  "cam.prompt.title": "अपने प्रमाण सुरक्षित करें",
+  "cam.prompt.desc":
+    "कैमरा एक्सेस दें ताकि पुष्टि हो सके कि दस्तावेज़ आप ही जमा कर रहे हैं।",
+  "cam.allow": "कैमरा चालू करें",
+  "cam.later": "अभी नहीं",
+  "cam.verify.title": "चेहरा सत्यापन",
+  "cam.step.center": "अपना चेहरा गोले के अंदर रखें",
+  "cam.step.left": "चेहरा थोड़ा बाईं ओर घुमाएँ",
+  "cam.step.right": "चेहरा थोड़ा दाईं ओर घुमाएँ",
+  "cam.done.title": "आप सत्यापित हैं",
+  "cam.done.desc": "इस सत्र के लिए आपकी पहचान की पुष्टि हो गई है।",
+  "cam.continue": "वॉल्ट पर जाएँ",
+  "cam.error": "कैमरा एक्सेस अवरुद्ध है। आप बिना सत्यापन के जारी रख सकते हैं।",
+  "cam.badge": "पहचान सत्यापित",
+  "cam.disclaimer": "यह केवल प्रोटोटाइप जाँच है। कोई बायोमेट्रिक डेटा संग्रहित नहीं होता।",
   "fs.title": "AI द्वारा निकाले गए वित्तीय संकेत",
   "fs.subtitle":
     "ये आपके दस्तावेज़ों से निकाले गए पैसों के पैटर्न हैं — सिर्फ़ दस्तावेज़ की स्थिति नहीं।",

@@ -15,6 +15,7 @@ import {
   X,
 } from "lucide-react";
 import { Stepper } from "@/components/Stepper";
+import { CameraVerification } from "@/components/CameraVerification";
 import { StatusBadge } from "@/components/StatusBadge";
 import { useI18n } from "@/lib/i18n";
 import { useStore } from "@/lib/store";
@@ -196,6 +197,7 @@ function EvidencePage() {
         />
       )}
       {detail && <DetailModal evidence={detail} onClose={() => setDetail(null)} />}
+      <CameraVerification />
     </div>
   );
 }
