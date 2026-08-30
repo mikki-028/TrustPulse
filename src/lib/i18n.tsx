@@ -570,6 +570,23 @@ const hi: Dict = {
 };
 
 const enExtra: Dict = {
+  "kyc.title": "Aadhaar & PAN verification",
+  "kyc.desc": "Verify your government IDs with a one-time password to strengthen your identity.",
+  "kyc.aadhaar": "Aadhaar number",
+  "kyc.pan": "PAN number",
+  "kyc.aadhaar.ph": "1234 5678 9012",
+  "kyc.pan.ph": "ABCDE1234F",
+  "kyc.send": "Send OTP",
+  "kyc.resend": "Resend OTP",
+  "kyc.sent": "OTP sent to the mobile linked with your Aadhaar (demo code: 123456).",
+  "kyc.otp": "Enter 6-digit OTP",
+  "kyc.verify": "Verify OTP",
+  "kyc.verified": "Aadhaar & PAN verified",
+  "kyc.pending": "Not verified yet",
+  "kyc.error.aadhaar": "Enter a valid 12-digit Aadhaar number.",
+  "kyc.error.pan": "Enter a valid PAN (e.g. ABCDE1234F).",
+  "kyc.error.otp": "Incorrect OTP. Please try again.",
+  "kyc.disclaimer": "Prototype only — no real Aadhaar or PAN data is sent or stored.",
   "cam.prompt.title": "Secure your evidence",
   "cam.prompt.desc":
     "Allow camera access to verify that you are the person submitting these documents.",
@@ -648,6 +665,23 @@ const enExtra: Dict = {
 };
 
 const hiExtra: Dict = {
+  "kyc.title": "आधार और पैन सत्यापन",
+  "kyc.desc": "अपनी पहचान मज़बूत करने के लिए OTP से अपने सरकारी दस्तावेज़ सत्यापित करें।",
+  "kyc.aadhaar": "आधार नंबर",
+  "kyc.pan": "पैन नंबर",
+  "kyc.aadhaar.ph": "1234 5678 9012",
+  "kyc.pan.ph": "ABCDE1234F",
+  "kyc.send": "OTP भेजें",
+  "kyc.resend": "OTP दोबारा भेजें",
+  "kyc.sent": "आधार से जुड़े मोबाइल पर OTP भेजा गया (डेमो कोड: 123456)।",
+  "kyc.otp": "6 अंकों का OTP दर्ज करें",
+  "kyc.verify": "OTP सत्यापित करें",
+  "kyc.verified": "आधार और पैन सत्यापित",
+  "kyc.pending": "अभी सत्यापित नहीं",
+  "kyc.error.aadhaar": "12 अंकों का सही आधार नंबर दर्ज करें।",
+  "kyc.error.pan": "सही पैन नंबर दर्ज करें (जैसे ABCDE1234F)।",
+  "kyc.error.otp": "OTP गलत है। कृपया पुनः प्रयास करें।",
+  "kyc.disclaimer": "यह केवल प्रोटोटाइप है — कोई वास्तविक आधार/पैन डेटा संग्रहित नहीं होता।",
   "cam.prompt.title": "अपने प्रमाण सुरक्षित करें",
   "cam.prompt.desc":
     "कैमरा एक्सेस दें ताकि पुष्टि हो सके कि दस्तावेज़ आप ही जमा कर रहे हैं।",

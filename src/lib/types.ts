@@ -57,6 +57,9 @@ export interface UserProfile {
   occupation: string;
   yearsInBusiness: string;
   location: string;
+  aadhaar?: string;
+  pan?: string;
+  kycVerified?: boolean;
 }
 
 export interface DimensionResult {
