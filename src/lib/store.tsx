@@ -102,7 +102,7 @@ export function StoreProvider({ children }: { children: ReactNode }) {
       trust,
       recommendations,
     }),
-    [profile, setProfile, evidence, addEvidence, removeEvidence, analyzed, setAnalyzed, reset, trust, recommendations],
+    [hydrated, profile, setProfile, evidence, addEvidence, removeEvidence, analyzed, setAnalyzed, reset, trust, recommendations],
   );
 
   return <StoreContext.Provider value={value}>{children}</StoreContext.Provider>;
