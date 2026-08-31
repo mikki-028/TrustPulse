@@ -2,6 +2,7 @@ import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { AlertTriangle, ArrowRight, Check, Lightbulb } from "lucide-react";
 import { ScoreDial } from "@/components/ScoreDial";
 import { Stepper } from "@/components/Stepper";
+import { RequireProfile } from "@/components/RequireProfile";
 import { useI18n } from "@/lib/i18n";
 import { useStore } from "@/lib/store";
 import { confidenceBand, scoreBand } from "@/lib/scoring";
@@ -28,6 +29,14 @@ export const Route = createFileRoute("/trust")({
 });
 
 function TrustPage() {
+  return (
+    <RequireProfile>
+      <TrustContent />
+    </RequireProfile>
+  );
+}
+
+function TrustContent() {
   const { t } = useI18n();
   const { trust, recommendations } = useStore();
   const navigate = useNavigate();
