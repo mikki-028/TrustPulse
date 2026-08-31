@@ -2,6 +2,7 @@ import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useEffect, useMemo, useState } from "react";
 import { ArrowRight, Check, Loader2, Sparkles, Triangle } from "lucide-react";
 import { Stepper } from "@/components/Stepper";
+import { RequireProfile } from "@/components/RequireProfile";
 import { useI18n } from "@/lib/i18n";
 import { useStore } from "@/lib/store";
 import { QUALITY_MULTIPLIER } from "@/lib/scoring";
@@ -38,6 +39,14 @@ const ORDER: EvidenceCategory[] = [
 ];
 
 function AnalysisPage() {
+  return (
+    <RequireProfile>
+      <AnalysisContent />
+    </RequireProfile>
+  );
+}
+
+function AnalysisContent() {
   const { t } = useI18n();
   const { evidence, trust, analyzed, setAnalyzed } = useStore();
   const navigate = useNavigate();

@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
 import { AlertTriangle, Award, Check, FileText, Printer, ShieldCheck } from "lucide-react";
 import { StatusBadge } from "@/components/StatusBadge";
+import { RequireProfile } from "@/components/RequireProfile";
 import { useI18n } from "@/lib/i18n";
 import { useStore } from "@/lib/store";
 import { QUALITY_MULTIPLIER, confidenceBand, scoreBand } from "@/lib/scoring";
@@ -30,6 +31,14 @@ export const Route = createFileRoute("/resume")({
 });
 
 function ResumePage() {
+  return (
+    <RequireProfile>
+      <ResumeContent />
+    </RequireProfile>
+  );
+}
+
+function ResumeContent() {
   const { t } = useI18n();
   const { profile, evidence, trust } = useStore();
   const [cardOpen, setCardOpen] = useState(false);

@@ -15,6 +15,7 @@ import {
   X,
 } from "lucide-react";
 import { Stepper } from "@/components/Stepper";
+import { RequireProfile } from "@/components/RequireProfile";
 import { CameraVerification } from "@/components/CameraVerification";
 import { StatusBadge } from "@/components/StatusBadge";
 import { useI18n } from "@/lib/i18n";
@@ -57,6 +58,14 @@ function todayISO() {
 }
 
 function EvidencePage() {
+  return (
+    <RequireProfile>
+      <EvidenceContent />
+    </RequireProfile>
+  );
+}
+
+function EvidenceContent() {
   const { t } = useI18n();
   const { evidence, addEvidence, removeEvidence, setAnalyzed } = useStore();
   const navigate = useNavigate();
