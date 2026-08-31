@@ -1,8 +1,7 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
-import { AlertTriangle, ArrowRight, BadgeCheck, Eye, Lock, ShieldCheck, Sparkles } from "lucide-react";
+import { useState } from "react";
+import { ArrowRight, BadgeCheck, Eye, Lock, ShieldCheck, Sparkles } from "lucide-react";
 import { Stepper } from "@/components/Stepper";
-import { GATE_WARNING_KEY } from "@/components/RequireProfile";
 import { useI18n } from "@/lib/i18n";
 import { useStore } from "@/lib/store";
 
