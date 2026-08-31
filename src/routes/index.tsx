@@ -58,18 +58,6 @@ function IdentityPage() {
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6 lg:py-14">
-      {gateWarning && (
-        <div
-          role="alert"
-          className="tp-rise mb-6 flex items-start gap-3 rounded-2xl border border-danger/40 bg-danger/10 px-4 py-3.5 text-sm font-medium text-danger"
-        >
-          <AlertTriangle className="mt-0.5 size-5 shrink-0" aria-hidden />
-          <div>
-            <p className="font-semibold">{t("gate.title")}</p>
-            <p>{t("gate.warning")}</p>
-          </div>
-        </div>
-      )}
       <Stepper current={1} />
 
       <div className="mt-10 grid items-start gap-10 lg:mt-14 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16">
