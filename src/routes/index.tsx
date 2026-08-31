@@ -30,18 +30,7 @@ function IdentityPage() {
   const navigate = useNavigate();
   const [form, setForm] = useState(profile);
   const [errors, setErrors] = useState<Record<string, string>>({});
-  const [gateWarning, setGateWarning] = useState(false);
 
-  useEffect(() => {
-    try {
-      if (window.sessionStorage.getItem(GATE_WARNING_KEY)) {
-        window.sessionStorage.removeItem(GATE_WARNING_KEY);
-        setGateWarning(true);
-      }
-    } catch {
-      /* ignore */
-    }
-  }, []);
 
   const update = (key: keyof typeof form) => (e: React.ChangeEvent<HTMLInputElement>) =>
     setForm((f) => ({ ...f, [key]: e.target.value }));
