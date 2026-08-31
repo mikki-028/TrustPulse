@@ -90,6 +90,7 @@ export function StoreProvider({ children }: { children: ReactNode }) {
 
   const value = useMemo(
     () => ({
+      hydrated,
       profile,
       setProfile,
       evidence,
