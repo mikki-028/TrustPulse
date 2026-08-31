@@ -13,7 +13,17 @@ import type { Evidence, UserProfile } from "./types";
 
 const STORAGE_KEY = "trustpulse-state-v1";
 
+export function isProfileComplete(p: UserProfile): boolean {
+  return !!(
+    p.fullName.trim() &&
+    p.occupation.trim() &&
+    /^\d{1,2}(\.\d)?$/.test(p.yearsInBusiness.trim()) &&
+    p.location.trim()
+  );
+}
+
 interface StoreValue {
+  hydrated: boolean;
   profile: UserProfile;
   setProfile: (p: UserProfile) => void;
   evidence: Evidence[];
