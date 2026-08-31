@@ -1,8 +1,7 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
-import { AlertTriangle, ArrowRight, BadgeCheck, Eye, Lock, ShieldCheck, Sparkles } from "lucide-react";
+import { useState } from "react";
+import { ArrowRight, BadgeCheck, Eye, Lock, ShieldCheck, Sparkles } from "lucide-react";
 import { Stepper } from "@/components/Stepper";
-import { GATE_WARNING_KEY } from "@/components/RequireProfile";
 import { useI18n } from "@/lib/i18n";
 import { useStore } from "@/lib/store";
 
@@ -31,18 +30,7 @@ function IdentityPage() {
   const navigate = useNavigate();
   const [form, setForm] = useState(profile);
   const [errors, setErrors] = useState<Record<string, string>>({});
-  const [gateWarning, setGateWarning] = useState(false);
 
-  useEffect(() => {
-    try {
-      if (window.sessionStorage.getItem(GATE_WARNING_KEY)) {
-        window.sessionStorage.removeItem(GATE_WARNING_KEY);
-        setGateWarning(true);
-      }
-    } catch {
-      /* ignore */
-    }
-  }, []);
 
   const update = (key: keyof typeof form) => (e: React.ChangeEvent<HTMLInputElement>) =>
     setForm((f) => ({ ...f, [key]: e.target.value }));
@@ -70,18 +58,6 @@ function IdentityPage() {
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6 lg:py-14">
-      {gateWarning && (
-        <div
-          role="alert"
-          className="tp-rise mb-6 flex items-start gap-3 rounded-2xl border border-danger/40 bg-danger/10 px-4 py-3.5 text-sm font-medium text-danger"
-        >
-          <AlertTriangle className="mt-0.5 size-5 shrink-0" aria-hidden />
-          <div>
-            <p className="font-semibold">{t("gate.title")}</p>
-            <p>{t("gate.warning")}</p>
-          </div>
-        </div>
-      )}
       <Stepper current={1} />
 
       <div className="mt-10 grid items-start gap-10 lg:mt-14 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16">
