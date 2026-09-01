@@ -11,7 +11,7 @@ import { SEED_EVIDENCE, SEED_PROFILE } from "./seed";
 import { buildRecommendations, computeTrustProfile } from "./scoring";
 import type { Evidence, UserProfile } from "./types";
 
-const STORAGE_KEY = "trustpulse-state-v1";
+const STORAGE_KEY = "trustpulse-state-v2";
 
 export function isProfileComplete(p: UserProfile): boolean {
   return !!(
